@@ -11,14 +11,9 @@ Projekt jest cały czas w trakcie rozwijania także jakbyś natrafił/a na jaki�
 ze mną kontaktować przez Discord: Access#2933
 
 Instrukcja obsługi:
-    - Na początku trzeba ręcznie zrobić sobie 3 pliki tekstowe:
-        - database.txt - tam będziemy przechowywać dane użytkowników RAZEM Z ICH HASŁAMI!!!
-        - earnings.txt - tutaj przechowujemy informacje ile nasza maszyna zarobiła pieniędzy
-        - logs.txt - JESZCZE nie jest potrzebny ale niebawem będziemy mogli znaleźć tam logi użytkowników
-    - należy też pozmieniać nazwy ścieżek tak aby pasowały wyżej stworzonym folderom (40. i 185. linijka kodu)
+    - JUŻ NIE TRZEBA ręcznie tworzyć ani plików ani folderów!!
     - do przemieszczania się po tym prostym GUI używamy odpowiednich cyfr
-    - aby dostać się do panelu administratora należy wylogować się ze wszystkich kont
-      a następnie wpisać "Admin1"
+    - aby dostać się do panelu administratora należy wylogować się ze wszystkich kont a następnie wpisać "Admin1"
 """
 
 
@@ -31,9 +26,31 @@ Instrukcja obsługi:
 |  in progress  |   User stats - games played - money gain - admin access only
 """
 
+
 import random
+import os
 
 print('\n\t\tWORK STILL IN PROGRESS\n\n\n')
+
+
+def creating_necessary_files():
+    db_path = 'venv/slm_data/database.txt'
+    cash_path = 'venv/slm_data/earnings.txt'
+    log_path = 'venv/slm_data/logs.txt'
+
+    db = os.path.isfile(db_path)
+    cash = os.path.isfile(cash_path)
+    log = os.path.isfile(log_path)
+
+    if not db:
+        with open(db_path, 'w') as file:
+            file.write('Admin1 Admin1 10000000.0\n')
+    if not cash:
+        with open(cash_path, 'w') as file:
+            file.write('0')
+    if not log:
+        with open(log_path, 'w') as file:
+            file.write('')
 
 
 def database_assignment():
@@ -57,6 +74,11 @@ def sing_in(database):
     while True:
         money = float(input('Place your first deposit, at least 5$\nAmount in $: '))
         if money >= 5:
+            cash = 0.0
+            with open('venv/slm_data/earnings.txt', 'r') as file:
+                cash = float(file.read())
+            with open('venv/slm_data/earnings.txt', 'w') as file:
+                file.write(f'{cash+money}')
             break
         else:
             print('Wrong amount, please try again.')
@@ -76,7 +98,6 @@ def deposit():
         with open('venv/slm_data/earnings.txt', 'r') as money_file:
             current_money = float(money_file.read())
         depo = float(input('Deposit at least 5$: '))
-        print(current_money)
         if depo >= 5:
             current_money += depo
             with open('venv/slm_data/earnings.txt', 'w') as file:
@@ -135,7 +156,7 @@ def slot_machine(money):
 def simple_logged_interface(username, money_amount):
     while True:
         case = int(input(f'Welcome {username}, you have {money_amount}$!\nLet{chr(92)}s play!\n\n1. Deposit\n2. '
-                         f'Play\n3. Quit\n'))
+                         f'Play\n3. Quit ang logout\n'))
         if case == 1:
             money_amount += deposit()
         elif case == 2:
@@ -174,10 +195,17 @@ def simple_start_interface():
             passwd = input('Password:\t')
             for i in user_dataBase:
                 if log_in(username, passwd, i):
-                    i[2] = simple_logged_interface(username, float(i[2]))
+                    i[2] = str(simple_logged_interface(username, float(i[2])))
                     flag = True
+                    print(*i)
                     break
-            if not flag:
+            if flag:
+                usr = ''
+                with open('venv/slm_data/database.txt', 'w') as file:
+                    for i in user_dataBase:
+                        usr = f'{i[0]} {i[1]} {i[2]}\n'
+                        file.write(usr)
+            else:
                 print('Wrong username or password :(')
         elif case == '3':
             exit()
@@ -195,4 +223,5 @@ def main():
     simple_start_interface()
 
 
+creating_necessary_files()
 main()
