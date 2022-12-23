@@ -15,7 +15,7 @@ Instrukcja obsługi:
         - database.txt - tam będziemy przechowywać dane użytkowników RAZEM Z ICH HASŁAMI!!!
         - earnings.txt - tutaj przechowujemy informacje ile nasza maszyna zarobiła pieniędzy
         - logs.txt - JESZCZE nie jest potrzebny ale niebawem będziemy mogli znaleźć tam logi użytkowników
-    - należy też pozmieniać nazwy ścieżek tak aby pasowały wyżej stworzonym folderom
+    - należy też pozmieniać nazwy ścieżek tak aby pasowały wyżej stworzonym folderom (40. i 185. linijka kodu)
     - do przemieszczania się po tym prostym GUI używamy odpowiednich cyfr
     - aby dostać się do panelu administratora należy wylogować się ze wszystkich kont
       a następnie wpisać "Admin1"
