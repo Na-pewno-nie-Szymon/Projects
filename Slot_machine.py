@@ -18,12 +18,14 @@ Instrukcja obsługi:
 
 
 """TODO
-|     DONE!     |   Implement simple txt database
-|     DONE!     |   Implement total earning counter
-|  in progress  |   Implement logs only last 200 interactions
-|  in progress  |   Implement deposit value database
+|     DONE!     |   Implement simple txt database (usrName, passwd, wallet)
+|     DONE!     |   Implement total income counter
+|  in progress  |   Implement profit/loss algorithms
+|  in progress  |   Implement logs only last 200 interactions (who, dep/win/los/with, how much, when)
+|  in progress  |   Implement deposit value database (who, when, how much)
 |  in progress  |   Make BIG RED BUTTON that clears every database
-|  in progress  |   User stats - games played - money gain - admin access only
+|  in progress  |   User stats - games played - money gain/loss - admin access only
+|  in progress  |   Repair file and directories creating
 """
 
 
@@ -223,5 +225,6 @@ def main():
     simple_start_interface()
 
 
+    
 creating_necessary_files()
-main()
+if __name__ == '__main__':  main()
